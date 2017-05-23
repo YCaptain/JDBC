@@ -20,10 +20,10 @@ public class MemberDaoImpl implements MemberDao {
 		PreparedStatement st = null;
 		try{
 			con = JdbcUtils.getConnection();
-			String sql = "INSERT INTO members(MNumber, SSN, dateOfBirth, joinedDate)"
+			String sql = "INSERT INTO members(memNumber, SSN, dateOfBirth, joinedDate)"
 					+ " VALUES(?,?,?,?)";
 			st = con.prepareStatement(sql);
-			st.setInt(1, member.getMNumber());
+			st.setInt(1, member.getMemNumber());
 			st.setInt(2, member.getSSN());
 			st.setDate(3, new Date(member.getDateOfBirth().getTime()));
 			st.setDate(4, new Date(member.getJoinedDate().getTime()));
@@ -37,20 +37,20 @@ public class MemberDaoImpl implements MemberDao {
 	}
 
 	@Override
-	public Member getMember(int MNumber) {
+	public Member getMember(int memNumber) {
 		Connection con = null;
 		PreparedStatement st = null;
 		ResultSet rs = null;
 		try{
 			con = JdbcUtils.getConnection();
-			String sql = "SELECT * FROM members WHERE MNumber = ?";
+			String sql = "SELECT * FROM members WHERE memNumber = ?";
 			st = con.prepareStatement(sql);
-			st.setInt(1, MNumber);
+			st.setInt(1, memNumber);
 			rs = st.executeQuery();
 			CustomerService customerService = new CustomerService();
 			Customer customer = customerService.query(rs.getInt("SSN"));
 			Member member = new Member(customer);
-			member.updateMNumber(MNumber);
+			member.updateMemNumber(memNumber);
 			member.updateDateOfBirth(rs.getDate("dateOfBirth"));
 			member.updateJoinedDate(rs.getDate("joinedDate"));
 			member.updateSSN(rs.getInt("SSN"));
@@ -69,12 +69,12 @@ public class MemberDaoImpl implements MemberDao {
 		try{
 			con = JdbcUtils.getConnection();
 			String sql = "UPDATE members SET SSN = ?, dateOfBirth = ?, joinedDate = ?"
-					+ " WHERE MNumber = ?";
+					+ " WHERE memNumber = ?";
 			st = con.prepareStatement(sql);
 			st.setInt(1, member.getSSN());
 			st.setDate(2, new Date(member.getDateOfBirth().getTime()));
 			st.setDate(3, new Date(member.getJoinedDate().getTime()));
-			st.setInt(4, member.getMNumber());
+			st.setInt(4, member.getMemNumber());
 			int count = st.executeUpdate();
 			System.out.println("Update record: " + count);
 			return count;
@@ -91,9 +91,9 @@ public class MemberDaoImpl implements MemberDao {
 		PreparedStatement st = null;
 		try{
 			con = JdbcUtils.getConnection();
-			String sql = "DELETE FROM members WHERE MNumber = ?";
+			String sql = "DELETE FROM members WHERE memNumber = ?";
 			st = con.prepareStatement(sql);
-			st.setInt(1, member.getMNumber());
+			st.setInt(1, member.getMemNumber());
 			int count = st.executeUpdate();
 			System.out.println("Delete record: " + count);
 			return count;

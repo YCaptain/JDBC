@@ -4,7 +4,7 @@ import java.util.Date;
 import java.text.SimpleDateFormat;
 
 public class SoldCar extends Car{
-	private int SNumber;
+	private int soldNumber;
 	private int SSN;
 	private Date orderDate;
 	private Date requiredDate;
@@ -13,34 +13,34 @@ public class SoldCar extends Car{
 	public SoldCar(){}
 	
 	public SoldCar(Car car) {
-		this(car.getRegistrationNumber(), car.getModel(), car.getStatus(), car.getDateOfManufacture());
+		this(car.getRegistrationNumber(), car.getModelNum(), car.getStatus(), car.getDateOfManufacture());
 	}
 	
-	public SoldCar(int registrationNumber, String model, Status status, Date dateOfManuFacture) {
-		super(registrationNumber, model, status, dateOfManuFacture);
+	public SoldCar(int registrationNumber, int modelNum, Status status, Date dateOfManuFacture) {
+		super(registrationNumber, modelNum, status, dateOfManuFacture);
 	}
 	
-	public SoldCar(int registrationNumber, String model, Status status, Date dateOfManuFacture, int SNumber, int SSN, Date orderDate, Date requiredDate, double soldPrice) {
-		this(registrationNumber, model, status, dateOfManuFacture);
-		this.SNumber = SNumber;
+	public SoldCar(int registrationNumber, int modelNum, Status status, Date dateOfManuFacture, int soldNumber, int SSN, Date orderDate, Date requiredDate, double soldPrice) {
+		this(registrationNumber, modelNum, status, dateOfManuFacture);
+		this.soldNumber = soldNumber;
 		this.SSN = SSN;
 		this.orderDate = orderDate;
 		this.requiredDate = requiredDate;
 		this.soldPrice = soldPrice;
 	}
 	
-	public SoldCar(int SNumber, int SSN, Date orderDate, Date requiredDate, double soldPrice, Car car) {
-		this(car.getRegistrationNumber(), car.getModel(), car.getStatus(), car.getDateOfManufacture(), 
-				SNumber, SSN, orderDate, requiredDate, soldPrice);
+	public SoldCar(int soldNumber, int SSN, Date orderDate, Date requiredDate, double soldPrice, Car car) {
+		this(car.getRegistrationNumber(), car.getModelNum(), car.getStatus(), car.getDateOfManufacture(), 
+				soldNumber, SSN, orderDate, requiredDate, soldPrice);
 	}
 	
 	
-	public int getSNumber() {
-		return SNumber;
+	public int getSoldNumber() {
+		return soldNumber;
 	}
 	
-	public void updateSNumber(int SNumber) {
-		this.SNumber = SNumber;
+	public void updateSoldNumber(int soldNumber) {
+		this.soldNumber = soldNumber;
 	}
 	
 	public int getSSN() {
@@ -80,7 +80,7 @@ public class SoldCar extends Car{
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd");
 		String dayO = sdf.format(orderDate);
 		String dayR = sdf.format(requiredDate);
-		String toReturn = super.toString() + "; [SNumer=" + SNumber + ", SSN=" + SSN + ", orderDate="  + dayO + ", requiredDate=" + dayR + ", soldPrice=" + soldPrice + "]";
+		String toReturn = super.toString() + "; [SNumer=" + soldNumber + ", SSN=" + SSN + ", orderDate="  + dayO + ", requiredDate=" + dayR + ", soldPrice=" + soldPrice + "]";
 		return toReturn;
 	}
 }

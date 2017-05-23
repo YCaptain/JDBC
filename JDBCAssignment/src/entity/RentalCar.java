@@ -6,12 +6,12 @@ public class RentalCar extends Car{
 
 	public RentalCar(){}
 	
-	public RentalCar(int registrationNumber, String model, Status status, Date dateOfManuFacture) {
-		super(registrationNumber, model, status, dateOfManuFacture);
+	public RentalCar(int registrationNumber, int modelNum, Status status, Date dateOfManuFacture) {
+		super(registrationNumber, modelNum, status, dateOfManuFacture);
 	}
 	
 	public RentalCar(Car car) {
-		this(car.getRegistrationNumber(), car.getModel(), car.getStatus(), car.getDateOfManufacture());
+		this(car.getRegistrationNumber(), car.getModelNum(), car.getStatus(), car.getDateOfManufacture());
 	}
 	
 }

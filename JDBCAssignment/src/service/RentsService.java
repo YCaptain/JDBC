@@ -31,7 +31,7 @@ public class RentsService {
 	}
 	
 	public void update(Rents rents) {
-		if(rents.getRNumber() <= 0) {
+		if(rents.getRentNumber() <= 0) {
 			System.out.println("Invalid information, cannot update!!");
 		} else {
 			rentsDao.update(rents);
@@ -39,7 +39,7 @@ public class RentsService {
 	}
 	
 	public void delete(Rents rents) {
-		if(rents.getRNumber() <= 0) {
+		if(rents.getRentNumber() <= 0) {
 			System.out.println("Invalid information, cannot delete!!");
 		} else {
 			rentsDao.delete(rents);

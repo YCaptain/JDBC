@@ -26,13 +26,15 @@ public class TestDemo {
 		
 		ModelService modelService = new ModelService();
 		System.out.println("Add model: ");
-		Model model = new Model("COMMON", "BDIC", 4);
+		Model model = new Model(10000001, "COMMON", "BDIC", 4);
+		Model model2 = new Model(10000002, "GREAT", "BDIC", 6);
 		modelService.regist(model);
+		modelService.regist(model2);
 		
 		CarService carService = new CarService();
 		System.out.println("Add Car: ");
-		Car car = new Car(10100001, "COMMON", Status.RENTAL, new Date(System.currentTimeMillis()));
-		Car car2 = new Car(10100002, "COMMON", Status.SOLD, new Date(System.currentTimeMillis()));
+		Car car = new Car(10100001, model, Status.RENTAL, new Date(System.currentTimeMillis()));
+		Car car2 = new Car(10100002, model2, Status.SOLD, new Date(System.currentTimeMillis()));
 		carService.regist(car);
 		carService.regist(car2);
 

@@ -31,7 +31,7 @@ public class SoldCarService {
 	}
 	
 	public void update(SoldCar soldCar) {
-		if(soldCar.getSNumber() <= 0) {
+		if(soldCar.getSoldNumber() <= 0) {
 			System.out.println("Invalid information, cannot update!!");
 		} else {
 			soldCarDao.update(soldCar);
@@ -39,7 +39,7 @@ public class SoldCarService {
 	}
 	
 	public void delete(SoldCar soldCar) {
-		if(soldCar.getSNumber() <= 0) {
+		if(soldCar.getSoldNumber() <= 0) {
 			System.out.println("Invalid information, cannot delete!!");
 		} else {
 			soldCarDao.delete(soldCar);

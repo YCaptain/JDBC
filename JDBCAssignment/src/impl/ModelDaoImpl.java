@@ -17,12 +17,13 @@ public class ModelDaoImpl implements ModelDao {
 		PreparedStatement st = null;
 		try{
 			con = JdbcUtils.getConnection();
-			String sql = "INSERT INTO models(model, manufacturer, seats)"
-					+ " VALUES (?,?,?)";
+			String sql = "INSERT INTO models(modelNum, modelName, manufacturer, seats)"
+					+ " VALUES (?,?,?,?)";
 			st = con.prepareStatement(sql);
-			st.setString(1, model.getModel());
-			st.setString(2, model.getManufacturer());
-			st.setInt(3, model.getSeats());
+			st.setInt(1, model.getModelNum());
+			st.setString(2, model.getModelName());
+			st.setString(3, model.getManufacturer());
+			st.setInt(4, model.getSeats());
 			int count = st.executeUpdate();
 			System.out.println("Add record: " + count);
 		} catch(Exception e) {
@@ -39,12 +40,13 @@ public class ModelDaoImpl implements ModelDao {
 		ResultSet rs = null;
 		try{
 			con = JdbcUtils.getConnection();
-			String sql = "SELECT * FROM models WHERE model = ?";
+			String sql = "SELECT * FROM models WHERE modelNum = ?";
 			st = con.prepareStatement(sql);
 			st.setString(1, modelName);
 			rs = st.executeQuery();
 			Model model = new Model();
-			model.updateModel(rs.getString("model"));
+			model.updateModelNum(rs.getInt("modelNum"));
+			model.updateModelName(rs.getString("modelName"));
 			model.updateManufacturer(rs.getString("manufacturer"));
 			model.updateSeats(rs.getInt("seats"));
 			return model;
@@ -61,12 +63,13 @@ public class ModelDaoImpl implements ModelDao {
 		PreparedStatement st = null;
 		try{
 			con = JdbcUtils.getConnection();
-			String sql = "UPDATE models SET manufacturer = ?, seats = ?"
-					+ " WHERE model = ?";
+			String sql = "UPDATE models SET modelName = ?, manufacturer = ?, seats = ?"
+					+ " WHERE modelNum = ?";
 			st = con.prepareStatement(sql);
-			st.setString(1, model.getManufacturer());
-			st.setInt(2, model.getSeats());
-			st.setString(3, model.getModel());
+			st.setString(1, model.getModelName());
+			st.setString(2, model.getManufacturer());
+			st.setInt(3, model.getSeats());
+			st.setInt(4, model.getModelNum());
 			int count = st.executeUpdate();
 			System.out.println("Update record: " + count);
 			return count;
@@ -83,9 +86,9 @@ public class ModelDaoImpl implements ModelDao {
 		PreparedStatement st = null;
 		try{
 			con = JdbcUtils.getConnection();
-			String sql = "DELETE FROM models WHERE model = ?";
+			String sql = "DELETE FROM models WHERE modelNum = ?";
 			st = con.prepareStatement(sql);
-			st.setString(1, model.getModel());
+			st.setInt(1, model.getModelNum());
 			int count = st.executeUpdate();
 			System.out.println("Delete record: " + count);
 			return count;

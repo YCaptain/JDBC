@@ -1,24 +1,34 @@
 package entity;
 
 public class Model {
-	private String model;
+	private int modelNum;
+	private String modelName;
 	private String manufacturer;
 	private int seats;
 	
 	public Model(){}
 	
-	public Model(String model, String manufacturer, int seats) {
-		this.model = model;
+	public Model(int modelNum, String modelName, String manufacturer, int seats) {
+		this.modelNum = modelNum;
+		this.modelName = modelName;
 		this.manufacturer = manufacturer;
 		this.seats = seats;
 	}
 	
-	public String getModel() {
-		return model;
+	public int getModelNum() {
+		return modelNum;
 	}
 	
-	public void updateModel(String model) {
-		this.model = model;
+	public void updateModelNum(int modelNum) {
+		this.modelNum = modelNum;
+	}
+	
+	public String getModelName() {
+		return modelName;
+	}
+	
+	public void updateModelName(String modelName) {
+		this.modelName = modelName;
 	}
 	
 	public String getManufacturer() {

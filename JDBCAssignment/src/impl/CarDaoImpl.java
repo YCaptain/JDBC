@@ -19,11 +19,11 @@ public class CarDaoImpl implements CarDao {
 		PreparedStatement st = null;
 		try{
 			con = JdbcUtils.getConnection();
-			String sql = "INSERT INTO cars(registrationNumber, model, status, dateOfManufacture)"
+			String sql = "INSERT INTO cars(registrationNumber, modelNum, status, dateOfManufacture)"
 					+ " VALUES (?,?,?,?)";
 			st = con.prepareStatement(sql);
 			st.setInt(1, car.getRegistrationNumber());
-			st.setString(2, car.getModel());
+			st.setInt(2, car.getModelNum());
 			st.setString(3, car.getStatus().toString());
 			st.setDate(4, new Date(car.getDateOfManufacture().getTime()));
 			int count = st.executeUpdate();
@@ -48,7 +48,7 @@ public class CarDaoImpl implements CarDao {
 			rs = st.executeQuery();
 			Car car = new Car();
 			car.updateRegistrationNumber(registrationNumber);
-			car.updateModel(rs.getString("model"));
+			car.updateModelNum(rs.getInt("modelNum"));
 			car.updateDateOfManuFacture(rs.getDate("dateOfManuFacture"));
 			if(rs.getString("status").equals("RENTAL")) {
 				car.updateStatus(Status.RENTAL);
@@ -71,10 +71,10 @@ public class CarDaoImpl implements CarDao {
 		PreparedStatement st = null;
 		try{
 			con = JdbcUtils.getConnection();
-			String sql = "UPDATE cars SET model = ?, status = ?"
+			String sql = "UPDATE cars SET modelNum = ?, status = ?"
 					+ ", dateOfManuFacture = ? WHERE registrationNumber = ?";
 			st = con.prepareStatement(sql);
-			st.setString(1, car.getModel());
+			st.setInt(1, car.getModelNum());
 			st.setString(2, car.getStatus().toString());
 			st.setDate(3, new Date(car.getDateOfManufacture().getTime()));
 			st.setInt(4, car.getRegistrationNumber());

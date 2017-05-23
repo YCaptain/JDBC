@@ -4,8 +4,8 @@ import java.util.Date;
 import java.text.SimpleDateFormat;
 
 public class Rents {
-	private int RNumber;
-	private int MNumber;
+	private int rentNumber;
+	private int memNumber;
 	private int registrationNumber;
 	private double distance;
 	private Date orderDate;
@@ -14,9 +14,9 @@ public class Rents {
 	
 	public Rents(){}
 	
-	public Rents(int RNumber, int MNumber, int registrationNumber, double distance, Date orderDate, Date requiredDate, double rentPrice) {
-		this.RNumber = RNumber;
-		this.MNumber = MNumber;
+	public Rents(int rentNumber, int memNumber, int registrationNumber, double distance, Date orderDate, Date requiredDate, double rentPrice) {
+		this.rentNumber = rentNumber;
+		this.memNumber = memNumber;
 		this.registrationNumber = registrationNumber;
 		this.distance = distance;
 		this.orderDate = orderDate;
@@ -24,25 +24,25 @@ public class Rents {
 		this.rentPrice = rentPrice;
 	}
 	
-	public Rents(int RNumber, Member member, RentalCar rentalCar, double distance, Date orderDate, Date requiredDate, double rentPrice) {
-		this(RNumber, member.getMNumber(), rentalCar.getRegistrationNumber(), distance, orderDate,
+	public Rents(int rentNumber, Member member, RentalCar rentalCar, double distance, Date orderDate, Date requiredDate, double rentPrice) {
+		this(rentNumber, member.getMemNumber(), rentalCar.getRegistrationNumber(), distance, orderDate,
 				 requiredDate, rentPrice);
 	}
 	
-	public int getRNumber() {
-		return RNumber;
+	public int getRentNumber() {
+		return rentNumber;
 	}
 	
-	public void updateRNumber(int RNumber) {
-		this.RNumber = RNumber;
+	public void updateRentNumber(int rentNumber) {
+		this.rentNumber = rentNumber;
 	}
 	
-	public int getMNumber() {
-		return MNumber;
+	public int getMemNumber() {
+		return memNumber;
 	}
 	
-	public void updateMNumber(int MNumber) {
-		this.MNumber = MNumber;
+	public void updateMemNumber(int memNumber) {
+		this.memNumber = memNumber;
 	}
 	
 	public int getRegistrationNumber() {
@@ -90,7 +90,7 @@ public class Rents {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd");
 		String dayO = sdf.format(orderDate);
 		String dayR = sdf.format(requiredDate);
-		String toReturn = "[RNumber=" + RNumber + ", MNumber=" + MNumber + ", registrationNumber=" + registrationNumber
+		String toReturn = "[rentNumber=" + rentNumber + ", memNumber=" + memNumber + ", registrationNumber=" + registrationNumber
 				+ ", distance=" + distance + ", orderDate=" + dayO + ", requiredDate=" + dayR + ", rentPrice=" + rentPrice + "]";
 		return toReturn;
 	}

@@ -20,8 +20,8 @@ public class MemberService {
 		}
 	}
 	
-	public Member query(int MNumber) {
-		Member member = memberDao.getMember(MNumber);
+	public Member query(int memNumber) {
+		Member member = memberDao.getMember(memNumber);
 		if(member == null) {
 			System.out.println("The query result is empty!!");
 		} else {
@@ -31,7 +31,7 @@ public class MemberService {
 	}
 	
 	public void update(Member member) {
-		if(member.getMNumber() <= 0) {
+		if(member.getMemNumber() <= 0) {
 			System.out.println("Invalid information, cannot update!!");
 		} else {
 			memberDao.update(member);
@@ -39,7 +39,7 @@ public class MemberService {
 	}
 	
 	public void delete(Member member) {
-		if(member.getMNumber() <= 0) {
+		if(member.getMemNumber() <= 0) {
 			System.out.println("Invalid information, cannot delete!!");
 		} else {
 			memberDao.delete(member);

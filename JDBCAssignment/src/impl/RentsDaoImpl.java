@@ -18,11 +18,11 @@ public class RentsDaoImpl implements RentsDao {
 		PreparedStatement st = null;
 		try{
 			con = JdbcUtils.getConnection();
-			String sql = "INSERT INTO rents(RNumber, MNumber, registrationNumber, distance, orderDate, requiredDate, rentPrice)"
+			String sql = "INSERT INTO rents(rentNumber, memNumber, registrationNumber, distance, orderDate, requiredDate, rentPrice)"
 					+ " VALUES(?,?,?,?,?,?,?)";
 			st = con.prepareStatement(sql);
-			st.setInt(1, rents.getRNumber());
-			st.setInt(2, rents.getMNumber());
+			st.setInt(1, rents.getRentNumber());
+			st.setInt(2, rents.getMemNumber());
 			st.setInt(3, rents.getRegistrationNumber());
 			st.setDouble(4, rents.getDistance());
 			st.setDate(5, new Date(rents.getOrderDate().getTime()));
@@ -38,7 +38,7 @@ public class RentsDaoImpl implements RentsDao {
 	}
 
 	@Override
-	public Rents getRent(int RNumber) {
+	public Rents getRent(int rentNumber) {
 		Connection con = null;
 		PreparedStatement st = null;
 		ResultSet rs = null;
@@ -46,11 +46,11 @@ public class RentsDaoImpl implements RentsDao {
 			con = JdbcUtils.getConnection();
 			String sql = "SELECT * FROM rents WHERE RNUmber = ?";
 			st = con.prepareStatement(sql);
-			st.setInt(1, RNumber);
+			st.setInt(1, rentNumber);
 			rs = st.executeQuery();
 			Rents rents = new Rents();
-			rents.updateRNumber(RNumber);
-			rents.updateMNumber(rs.getInt("MNumber"));
+			rents.updateRentNumber(rentNumber);
+			rents.updateMemNumber(rs.getInt("memNumber"));
 			rents.updateRegistrationNumber(rs.getInt("registrationNumber"));
 			rents.updateDistance(rs.getDouble("distance"));
 			rents.updateOrderDate(rs.getDate("orderDate"));
@@ -70,16 +70,16 @@ public class RentsDaoImpl implements RentsDao {
 		PreparedStatement st = null;
 		try{
 			con = JdbcUtils.getConnection();
-			String sql = "UPDATE rents SET MNumber = ?, registrationNumber = ?, distance = ?,"
-					+ " orderDate = ?, requiredDate = ?, rentPrice = ? WHERE RNumber = ?";
+			String sql = "UPDATE rents SET memNumber = ?, registrationNumber = ?, distance = ?,"
+					+ " orderDate = ?, requiredDate = ?, rentPrice = ? WHERE rentNumber = ?";
 			st = con.prepareStatement(sql);
-			st.setInt(1, rents.getMNumber());
+			st.setInt(1, rents.getMemNumber());
 			st.setInt(2, rents.getRegistrationNumber());
 			st.setDouble(3, rents.getDistance());
 			st.setDate(4, new Date(rents.getOrderDate().getTime()));
 			st.setDate(5, new Date(rents.getRequiredDate().getTime()));
 			st.setDouble(6, rents.getRentPrice());
-			st.setInt(7, rents.getRNumber());
+			st.setInt(7, rents.getRentNumber());
 			int count = st.executeUpdate();
 			System.out.println("Update record: " + count);
 			return count;
@@ -96,9 +96,9 @@ public class RentsDaoImpl implements RentsDao {
 		PreparedStatement st = null;
 		try{
 			con = JdbcUtils.getConnection();
-			String sql = "DELETE FROM rents WHERE RNumber = ?";
+			String sql = "DELETE FROM rents WHERE rentNumber = ?";
 			st = con.prepareStatement(sql);
-			st.setInt(1, rents.getRNumber());
+			st.setInt(1, rents.getRentNumber());
 			int count = st.executeUpdate();
 			System.out.println("Delete record: " + count);
 			return count;

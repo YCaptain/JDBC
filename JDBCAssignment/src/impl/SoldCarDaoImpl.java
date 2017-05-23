@@ -20,10 +20,10 @@ public class SoldCarDaoImpl implements SoldCarDao {
 		PreparedStatement st = null;
 		try{
 			con = JdbcUtils.getConnection();
-			String sql = "INSERT INTO soldCars(SNumber, SSN, registrationNumber, orderDate, requiredDate, soldPrice)"
+			String sql = "INSERT INTO soldCars(soldNumber, SSN, registrationNumber, orderDate, requiredDate, soldPrice)"
 					+ " VALUES(?,?,?,?,?,?)";
 			st = con.prepareStatement(sql);
-			st.setInt(1, soldCar.getSNumber());
+			st.setInt(1, soldCar.getSoldNumber());
 			st.setInt(2, soldCar.getSSN());
 			st.setInt(3, soldCar.getRegistrationNumber());
 			st.setDate(4, new Date(soldCar.getOrderDate().getTime()));
@@ -39,20 +39,20 @@ public class SoldCarDaoImpl implements SoldCarDao {
 	}
 
 	@Override
-	public SoldCar getSoldCar(int SNumber) {
+	public SoldCar getSoldCar(int soldNumber) {
 		Connection con = null;
 		PreparedStatement st = null;
 		ResultSet rs = null;
 		try{
 			con = JdbcUtils.getConnection();
-			String sql = "SELECT * FROM soldCars WHERE SNumber = ?";
+			String sql = "SELECT * FROM soldCars WHERE soldNumber = ?";
 			st = con.prepareStatement(sql);
-			st.setInt(1, SNumber);
+			st.setInt(1, soldNumber);
 			rs = st.executeQuery();
 			CarService carService = new CarService();
 			Car car = carService.query(rs.getInt("registrationNumber"));
 			SoldCar soldCar = new SoldCar(car);
-			soldCar.updateSNumber(rs.getInt("SNumber"));
+			soldCar.updateSoldNumber(rs.getInt("soldNumber"));
 			soldCar.updateSSN(rs.getInt("SSN"));
 			soldCar.updateRegistrationNumber(rs.getInt("registration"));
 			soldCar.updateOrderDate(rs.getDate("orderDate"));
@@ -73,14 +73,14 @@ public class SoldCarDaoImpl implements SoldCarDao {
 		try{
 			con = JdbcUtils.getConnection();
 			String sql = "UPDATE soldCars SET SSN = ?, registration = ?, orderDate = ?,"
-					+ " requiredDate = ?, soldPrice = ? WHERE SNumber = ?";
+					+ " requiredDate = ?, soldPrice = ? WHERE soldNumber = ?";
 			st = con.prepareStatement(sql);
 			st.setInt(1, soldCar.getSSN());
 			st.setInt(2, soldCar.getRegistrationNumber());
 			st.setDate(3, new Date(soldCar.getOrderDate().getTime()));
 			st.setDate(4, new Date(soldCar.getRequiredDate().getTime()));
 			st.setDouble(5, soldCar.getSoldPrice());
-			st.setInt(6, soldCar.getSNumber());
+			st.setInt(6, soldCar.getSoldNumber());
 			int count = st.executeUpdate();
 			System.out.println("Update record: " + count);
 			return count;
@@ -97,9 +97,9 @@ public class SoldCarDaoImpl implements SoldCarDao {
 		PreparedStatement st = null;
 		try{
 			con = JdbcUtils.getConnection();
-			String sql = "DELETE FROM soldCars WHERE SNumber = ?";
+			String sql = "DELETE FROM soldCars WHERE soldNumber = ?";
 			st = con.prepareStatement(sql);
-			st.setInt(1, soldCar.getSNumber());
+			st.setInt(1, soldCar.getSoldNumber());
 			int count = st.executeUpdate();
 			System.out.println("Delete record: " + count);
 			return count;

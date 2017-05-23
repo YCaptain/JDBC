@@ -13,7 +13,7 @@ public class ModelService {
 	}
 	
 	public void regist(Model model) {
-		if(model == null) {
+		if(model.getModelNum() <= 0) {
 			System.out.println("Invalid registration!!");
 		} else {
 			modelDao.addModel(model);
@@ -22,7 +22,7 @@ public class ModelService {
 	
 	public Model query(String modelName) {
 		Model model = modelDao.getModel(modelName);
-		if(model == null) {
+		if(model.getModelNum() <= 0) {
 			System.out.println("The query result is empty!!");
 		} else {
 			System.out.println(model.toString());
@@ -31,7 +31,7 @@ public class ModelService {
 	}
 	
 	public void delete(Model model) {
-		if(model.getModel() == null) {
+		if(model.getModelNum() <= 0) {
 			System.out.println("Invalid information, cannot delete!!");
 		} else {
 			modelDao.delete(model);

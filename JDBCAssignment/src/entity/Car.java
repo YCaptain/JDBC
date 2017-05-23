@@ -8,17 +8,21 @@ public class Car {
 		RENTAL, SOLD
 	}
 	private int registrationNumber;
-	private String model;
+	private int modelNum;
 	private Status status;
 	private Date dateOfManuFacture;
 	
 	public Car(){}
 	
-	public Car(int registrationNumber, String model, Status status, Date dateOfManuFacture) {
+	public Car(int registrationNumber, int modelNum, Status status, Date dateOfManuFacture) {
 		this.registrationNumber = registrationNumber;
-		this.model = model;
+		this.modelNum = modelNum;
 		this.status = status;
 		this.dateOfManuFacture = dateOfManuFacture;
+	}
+	
+	public Car(int registrationNumber, Model model, Status status, Date dateOfManuFacture) {
+		this(registrationNumber, model.getModelNum(), status, dateOfManuFacture);
 	}
 	
 	public int getRegistrationNumber() {
@@ -29,12 +33,12 @@ public class Car {
 		this.registrationNumber = registrationNumber;
 	}
 	
-	public String getModel() {
-		return model;
+	public int getModelNum() {
+		return modelNum;
 	}
 	
-	public void updateModel(String model) {
-		this.model = model;
+	public void updateModelNum(int modelNum) {
+		this.modelNum = modelNum;
 	}
 	
 	public Status getStatus() {
@@ -55,7 +59,7 @@ public class Car {
 	
 	@Override
 	public String toString() {
-		String toReturn = "[registrationNumber=" + registrationNumber + ", model=" + model + ", status=" + status.toString();
+		String toReturn = "[registrationNumber=" + registrationNumber + ", modelNum=" + modelNum + ", status=" + status.toString();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd");
 		String day = sdf.format(dateOfManuFacture);
 		toReturn += ", dateOfManuFacture=" + day + "]";
