@@ -33,7 +33,6 @@ public class InitUtils {
 			sql = "CREATE TABLE cars("
 				+ "registrationNumber INT PRIMARY KEY,"
 				+ "modelNum INT,"
-				+ "status VARCHAR(10) NOT NULL,"
 				+ "dateOfManufacture datetime NOT NULL,"
 				+ ""
 				+ "FOREIGN KEY (modelNum) REFERENCES models(modelNum) ON DELETE SET NULL ON UPDATE CASCADE"

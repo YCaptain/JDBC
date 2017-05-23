@@ -8,7 +8,6 @@ import java.sql.ResultSet;
 import dao.CarDao;
 import dao.DaoException;
 import entity.Car;
-import entity.Car.Status;
 import utils.JdbcUtils;
 
 public class CarDaoImpl implements CarDao {
@@ -19,13 +18,12 @@ public class CarDaoImpl implements CarDao {
 		PreparedStatement st = null;
 		try{
 			con = JdbcUtils.getConnection();
-			String sql = "INSERT INTO cars(registrationNumber, modelNum, status, dateOfManufacture)"
-					+ " VALUES (?,?,?,?)";
+			String sql = "INSERT INTO cars(registrationNumber, modelNum,dateOfManufacture)"
+					+ " VALUES (?,?,?)";
 			st = con.prepareStatement(sql);
 			st.setInt(1, car.getRegistrationNumber());
 			st.setInt(2, car.getModelNum());
-			st.setString(3, car.getStatus().toString());
-			st.setDate(4, new Date(car.getDateOfManufacture().getTime()));
+			st.setDate(3, new Date(car.getDateOfManufacture().getTime()));
 			int count = st.executeUpdate();
 			System.out.println("Add record: " + count);
 		} catch(Exception e) {
@@ -50,13 +48,6 @@ public class CarDaoImpl implements CarDao {
 			car.updateRegistrationNumber(registrationNumber);
 			car.updateModelNum(rs.getInt("modelNum"));
 			car.updateDateOfManuFacture(rs.getDate("dateOfManuFacture"));
-			if(rs.getString("status").equals("RENTAL")) {
-				car.updateStatus(Status.RENTAL);
-			} else if(rs.getString("status").equals("SOLD")) {
-				car.updateStatus(Status.SOLD);
-			} else {
-				throw new Exception();
-			}
 			return car;
 		} catch(Exception e) {
 			throw new DaoException(e.getMessage(), e);
@@ -71,13 +62,11 @@ public class CarDaoImpl implements CarDao {
 		PreparedStatement st = null;
 		try{
 			con = JdbcUtils.getConnection();
-			String sql = "UPDATE cars SET modelNum = ?, status = ?"
-					+ ", dateOfManuFacture = ? WHERE registrationNumber = ?";
+			String sql = "UPDATE cars SET modelNum = ?, dateOfManuFacture = ? WHERE registrationNumber = ?";
 			st = con.prepareStatement(sql);
 			st.setInt(1, car.getModelNum());
-			st.setString(2, car.getStatus().toString());
-			st.setDate(3, new Date(car.getDateOfManufacture().getTime()));
-			st.setInt(4, car.getRegistrationNumber());
+			st.setDate(2, new Date(car.getDateOfManufacture().getTime()));
+			st.setInt(3, car.getRegistrationNumber());
 			int count = st.executeUpdate();
 			System.out.println("Update record: " + count);
 			return count;

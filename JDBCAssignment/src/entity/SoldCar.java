@@ -13,15 +13,15 @@ public class SoldCar extends Car{
 	public SoldCar(){}
 	
 	public SoldCar(Car car) {
-		this(car.getRegistrationNumber(), car.getModelNum(), car.getStatus(), car.getDateOfManufacture());
+		this(car.getRegistrationNumber(), car.getModelNum(), car.getDateOfManufacture());
 	}
 	
-	public SoldCar(int registrationNumber, int modelNum, Status status, Date dateOfManuFacture) {
-		super(registrationNumber, modelNum, status, dateOfManuFacture);
+	public SoldCar(int registrationNumber, int modelNum, Date dateOfManuFacture) {
+		super(registrationNumber, modelNum, dateOfManuFacture);
 	}
 	
-	public SoldCar(int registrationNumber, int modelNum, Status status, Date dateOfManuFacture, int soldNumber, int SSN, Date orderDate, Date requiredDate, double soldPrice) {
-		this(registrationNumber, modelNum, status, dateOfManuFacture);
+	public SoldCar(int registrationNumber, int modelNum, Date dateOfManuFacture, int soldNumber, int SSN, Date orderDate, Date requiredDate, double soldPrice) {
+		this(registrationNumber, modelNum, dateOfManuFacture);
 		this.soldNumber = soldNumber;
 		this.SSN = SSN;
 		this.orderDate = orderDate;
@@ -30,7 +30,7 @@ public class SoldCar extends Car{
 	}
 	
 	public SoldCar(int soldNumber, int SSN, Date orderDate, Date requiredDate, double soldPrice, Car car) {
-		this(car.getRegistrationNumber(), car.getModelNum(), car.getStatus(), car.getDateOfManufacture(), 
+		this(car.getRegistrationNumber(), car.getModelNum(), car.getDateOfManufacture(), 
 				soldNumber, SSN, orderDate, requiredDate, soldPrice);
 	}
 	
