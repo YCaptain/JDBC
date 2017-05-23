@@ -1,31 +1,28 @@
 package impl;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
-import dao.CarDao;
 import dao.DaoException;
-import entity.Car;
-import entity.Car.Status;
+import dao.ModelDao;
+import entity.Model;
 import utils.JdbcUtils;
 
-public class CarDaoImpl implements CarDao {
+public class ModelDaoImpl implements ModelDao {
 
 	@Override
-	public void addCar(Car car) {
+	public void addModel(Model model) {
 		Connection con = null;
 		PreparedStatement st = null;
 		try{
 			con = JdbcUtils.getConnection();
-			String sql = "INSERT INTO cars(registrationNumber, model, status, dateOfManufacture)"
-					+ " VALUES (?,?,?,?)";
+			String sql = "INSERT INTO models(model, manufacturer, seats)"
+					+ " VALUES (?,?,?)";
 			st = con.prepareStatement(sql);
-			st.setInt(1, car.getRegistrationNumber());
-			st.setString(2, car.getModel());
-			st.setString(3, car.getStatus().toString());
-			st.setDate(4, new Date(car.getDateOfManufacture().getTime()));
+			st.setString(1, model.getModel());
+			st.setString(2, model.getManufacturer());
+			st.setInt(3, model.getSeats());
 			int count = st.executeUpdate();
 			System.out.println("Add record: " + count);
 		} catch(Exception e) {
@@ -36,28 +33,21 @@ public class CarDaoImpl implements CarDao {
 	}
 
 	@Override
-	public Car getCar(int registrationNumber) {
+	public Model getModel(String modelName) {
 		Connection con = null;
 		PreparedStatement st = null;
 		ResultSet rs = null;
 		try{
 			con = JdbcUtils.getConnection();
-			String sql = "SELECT * FROM cars WHERE registrationNumber = ?";
+			String sql = "SELECT * FROM models WHERE model = ?";
 			st = con.prepareStatement(sql);
-			st.setInt(1, registrationNumber);
+			st.setString(1, modelName);
 			rs = st.executeQuery();
-			Car car = new Car();
-			car.updateRegistrationNumber(registrationNumber);
-			car.updateModel(rs.getString("model"));
-			car.updateDateOfManuFacture(rs.getDate("dateOfManuFacture"));
-			if(rs.getString("status").equals("RENTAL")) {
-				car.updateStatus(Status.RENTAL);
-			} else if(rs.getString("status").equals("SOLD")) {
-				car.updateStatus(Status.SOLD);
-			} else {
-				throw new Exception();
-			}
-			return car;
+			Model model = new Model();
+			model.updateModel(rs.getString("model"));
+			model.updateManufacturer(rs.getString("manufacturer"));
+			model.updateSeats(rs.getInt("seats"));
+			return model;
 		} catch(Exception e) {
 			throw new DaoException(e.getMessage(), e);
 		} finally {
@@ -66,18 +56,17 @@ public class CarDaoImpl implements CarDao {
 	}
 
 	@Override
-	public int update(Car car) {
+	public int update(Model model) {
 		Connection con = null;
 		PreparedStatement st = null;
 		try{
 			con = JdbcUtils.getConnection();
-			String sql = "UPDATE cars SET model = ?, status = ?"
-					+ ", dateOfManuFacture = ? WHERE registrationNumber = ?";
+			String sql = "UPDATE models SET manufacturer = ?, seats = ?"
+					+ " WHERE model = ?";
 			st = con.prepareStatement(sql);
-			st.setString(1, car.getModel());
-			st.setString(2, car.getStatus().toString());
-			st.setDate(3, new Date(car.getDateOfManufacture().getTime()));
-			st.setInt(4, car.getRegistrationNumber());
+			st.setString(1, model.getManufacturer());
+			st.setInt(2, model.getSeats());
+			st.setString(3, model.getModel());
 			int count = st.executeUpdate();
 			System.out.println("Update record: " + count);
 			return count;
@@ -89,14 +78,14 @@ public class CarDaoImpl implements CarDao {
 	}
 
 	@Override
-	public int delete(Car car) {
+	public int delete(Model model) {
 		Connection con = null;
 		PreparedStatement st = null;
 		try{
 			con = JdbcUtils.getConnection();
-			String sql = "DELETE FROM cars WHERE registrationNumber = ?";
+			String sql = "DELETE FROM models WHERE model = ?";
 			st = con.prepareStatement(sql);
-			st.setInt(1, car.getRegistrationNumber());
+			st.setString(1, model.getModel());
 			int count = st.executeUpdate();
 			System.out.println("Delete record: " + count);
 			return count;

@@ -5,27 +5,28 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
-import dao.CarDao;
 import dao.DaoException;
-import entity.Car;
-import entity.Car.Status;
+import dao.MemberDao;
+import entity.Customer;
+import entity.Member;
+import service.CustomerService;
 import utils.JdbcUtils;
 
-public class CarDaoImpl implements CarDao {
+public class MemberDaoImpl implements MemberDao {
 
 	@Override
-	public void addCar(Car car) {
+	public void addMember(Member member) {
 		Connection con = null;
 		PreparedStatement st = null;
 		try{
 			con = JdbcUtils.getConnection();
-			String sql = "INSERT INTO cars(registrationNumber, model, status, dateOfManufacture)"
-					+ " VALUES (?,?,?,?)";
+			String sql = "INSERT INTO members(MNumber, SSN, dateOfBirth, joinedDate)"
+					+ " VALUES(?,?,?,?)";
 			st = con.prepareStatement(sql);
-			st.setInt(1, car.getRegistrationNumber());
-			st.setString(2, car.getModel());
-			st.setString(3, car.getStatus().toString());
-			st.setDate(4, new Date(car.getDateOfManufacture().getTime()));
+			st.setInt(1, member.getMNumber());
+			st.setInt(2, member.getSSN());
+			st.setDate(3, new Date(member.getDateOfBirth().getTime()));
+			st.setDate(4, new Date(member.getJoinedDate().getTime()));
 			int count = st.executeUpdate();
 			System.out.println("Add record: " + count);
 		} catch(Exception e) {
@@ -36,28 +37,24 @@ public class CarDaoImpl implements CarDao {
 	}
 
 	@Override
-	public Car getCar(int registrationNumber) {
+	public Member getMember(int MNumber) {
 		Connection con = null;
 		PreparedStatement st = null;
 		ResultSet rs = null;
 		try{
 			con = JdbcUtils.getConnection();
-			String sql = "SELECT * FROM cars WHERE registrationNumber = ?";
+			String sql = "SELECT * FROM members WHERE MNumber = ?";
 			st = con.prepareStatement(sql);
-			st.setInt(1, registrationNumber);
+			st.setInt(1, MNumber);
 			rs = st.executeQuery();
-			Car car = new Car();
-			car.updateRegistrationNumber(registrationNumber);
-			car.updateModel(rs.getString("model"));
-			car.updateDateOfManuFacture(rs.getDate("dateOfManuFacture"));
-			if(rs.getString("status").equals("RENTAL")) {
-				car.updateStatus(Status.RENTAL);
-			} else if(rs.getString("status").equals("SOLD")) {
-				car.updateStatus(Status.SOLD);
-			} else {
-				throw new Exception();
-			}
-			return car;
+			CustomerService customerService = new CustomerService();
+			Customer customer = customerService.query(rs.getInt("SSN"));
+			Member member = new Member(customer);
+			member.updateMNumber(MNumber);
+			member.updateDateOfBirth(rs.getDate("dateOfBirth"));
+			member.updateJoinedDate(rs.getDate("joinedDate"));
+			member.updateSSN(rs.getInt("SSN"));
+			return member;
 		} catch(Exception e) {
 			throw new DaoException(e.getMessage(), e);
 		} finally {
@@ -66,18 +63,18 @@ public class CarDaoImpl implements CarDao {
 	}
 
 	@Override
-	public int update(Car car) {
+	public int update(Member member) {
 		Connection con = null;
 		PreparedStatement st = null;
 		try{
 			con = JdbcUtils.getConnection();
-			String sql = "UPDATE cars SET model = ?, status = ?"
-					+ ", dateOfManuFacture = ? WHERE registrationNumber = ?";
+			String sql = "UPDATE members SET SSN = ?, dateOfBirth = ?, joinedDate = ?"
+					+ " WHERE MNumber = ?";
 			st = con.prepareStatement(sql);
-			st.setString(1, car.getModel());
-			st.setString(2, car.getStatus().toString());
-			st.setDate(3, new Date(car.getDateOfManufacture().getTime()));
-			st.setInt(4, car.getRegistrationNumber());
+			st.setInt(1, member.getSSN());
+			st.setDate(2, new Date(member.getDateOfBirth().getTime()));
+			st.setDate(3, new Date(member.getJoinedDate().getTime()));
+			st.setInt(4, member.getMNumber());
 			int count = st.executeUpdate();
 			System.out.println("Update record: " + count);
 			return count;
@@ -89,14 +86,14 @@ public class CarDaoImpl implements CarDao {
 	}
 
 	@Override
-	public int delete(Car car) {
+	public int delete(Member member) {
 		Connection con = null;
 		PreparedStatement st = null;
 		try{
 			con = JdbcUtils.getConnection();
-			String sql = "DELETE FROM cars WHERE registrationNumber = ?";
+			String sql = "DELETE FROM members WHERE MNumber = ?";
 			st = con.prepareStatement(sql);
-			st.setInt(1, car.getRegistrationNumber());
+			st.setInt(1, member.getMNumber());
 			int count = st.executeUpdate();
 			System.out.println("Delete record: " + count);
 			return count;

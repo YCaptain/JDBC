@@ -76,6 +76,10 @@ public class Customer {
 		return phone;
 	}
 	
+	public void updatePhone(int phone) {
+		this.phone = phone;
+	}
+	
 	@Override
 	public String toString() {
 		String toReturn = "[SSN=" + SSN + ", name=" + name + ", sex=" + sex.toString() + ", address=" + address

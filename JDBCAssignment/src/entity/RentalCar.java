@@ -10,4 +10,8 @@ public class RentalCar extends Car{
 		super(registrationNumber, model, status, dateOfManuFacture);
 	}
 	
+	public RentalCar(Car car) {
+		this(car.getRegistrationNumber(), car.getModel(), car.getStatus(), car.getDateOfManufacture());
+	}
+	
 }

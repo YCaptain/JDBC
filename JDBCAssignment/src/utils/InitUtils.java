@@ -49,7 +49,7 @@ public class InitUtils {
 					+ ")AUTO_INCREMENT=10200000";
 			st.execute(sql);
 
-			sql = "CREATE TABLE nonMember("
+			sql = "CREATE TABLE nonMembers("
 					+ "SSN INT PRIMARY KEY,"
 					+ ""
 					+ "FOREIGN KEY (SSN) REFERENCES customers (SSN) ON DELETE CASCADE ON UPDATE CASCADE)";

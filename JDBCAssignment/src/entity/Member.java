@@ -10,11 +10,25 @@ public class Member extends Customer{
 	
 	public Member(){}
 	
-	public Member(int SSN, String name, Sex sex, String address, String city, String country, int phone, int MNumber, Date dateOfBirth, Date joinedDate) {
+	public Member(int SSN, String name, Sex sex, String address, String city, String country, int phone) {
 		super(SSN, name, sex, address, city, country, phone);
+	}
+	
+	public Member(Customer customer) {
+		this(customer.getSSN(), customer.getName(), customer.getSex(), customer.getAddress(), customer.getCity(),
+				customer.getCountry(), customer.getPhone());
+	}
+	
+	public Member(int SSN, String name, Sex sex, String address, String city, String country, int phone, int MNumber, Date dateOfBirth, Date joinedDate) {
+		this(SSN, name, sex, address, city, country, phone);
 		this.MNumber = MNumber;
 		this.dateOfBirth = dateOfBirth;
 		this.joinedDate = joinedDate;
+	}
+	
+	public Member(int MNumber, Date dateOfBirth, Date joinedDate, Customer customer) {
+		this(customer.getSSN(), customer.getName(), customer.getSex(), customer.getAddress(), customer.getCity(),
+				customer.getCountry(), customer.getPhone(), MNumber, dateOfBirth, joinedDate);
 	}
 	
 	public int getMNumber() {
