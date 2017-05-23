@@ -10,15 +10,20 @@ import entity.Member;
 import entity.Model;
 import entity.NonMember;
 import entity.RentalCar;
+import entity.Rents;
+import entity.SoldCar;
 import service.CarService;
 import service.CustomerService;
 import service.MemberService;
 import service.ModelService;
 import service.NonMemberService;
 import service.RentalCarService;
+import service.RentsService;
+import service.SoldCarService;
 
 public class TestDemo {
 	public static void main(String[] args) throws Exception{
+		
 		ModelService modelService = new ModelService();
 		System.out.println("Add model: ");
 		Model model = new Model("COMMON", "BDIC", 4);
@@ -52,5 +57,15 @@ public class TestDemo {
 		System.out.println("Add rentalCar: ");
 		RentalCar rentalCar = new RentalCar(car);
 		rentalCarService.regist(rentalCar);
+
+		SoldCarService soldCarService = new SoldCarService();
+		System.out.println("Add soldCar: ");
+		SoldCar soldCar = new SoldCar(10300001, nonMember.getSSN(), new Date(System.currentTimeMillis()), new Date(System.currentTimeMillis()), 2500, car2);
+		soldCarService.regist(soldCar);
+		
+		RentsService rentsService = new RentsService();
+		System.out.println("Add rents: ");
+		Rents rents = new Rents(10400001, member, rentalCar, 100, new Date(System.currentTimeMillis()), new Date(System.currentTimeMillis()), 80);
+		rentsService.regist(rents);
 	}
 }

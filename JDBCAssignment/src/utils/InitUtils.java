@@ -63,14 +63,15 @@ public class InitUtils {
 			
 			sql = "CREATE TABLE soldCars("
 					+ "SNumber INT PRIMARY KEY,"
-					+ "SSN INT,"
 					+ "registrationNumber INT,"
+					+ "SSN INT,"
 					+ "orderDate datetime NOT NULL,"
 					+ "requiredDate datetime NOT NULL,"
 					+ "soldPrice double NOT NULL,"
 					+ ""
 					+ "FOREIGN KEY (registrationNumber) REFERENCES cars(registrationNumber) ON DELETE CASCADE ON UPDATE CASCADE,"
-					+ "FOREIGN KEY (SSN) REFERENCES customers(SSN) ON DELETE CASCADE ON UPDATE CASCADE)";
+					+ "FOREIGN KEY (SSN) REFERENCES customers(SSN) ON DELETE CASCADE ON UPDATE CASCADE"
+					+ ")AUTO_INCREMENT=10300000";
 			st.execute(sql);
 			
 			sql = "CREATE TABLE rents("
@@ -84,7 +85,7 @@ public class InitUtils {
 					+ ""
 					+ "FOREIGN KEY (registrationNumber) REFERENCES cars(registrationNumber) ON DELETE CASCADE ON UPDATE CASCADE,"
 					+ "FOREIGN KEY (MNumber) REFERENCES members(MNumber) ON DELETE CASCADE ON UPDATE CASCADE"
-					+ ")AUTO_INCREMENT=10300000";
+					+ ")AUTO_INCREMENT=10400000";
 			st.execute(sql);
 		} catch(Exception e) {
 			e.printStackTrace();

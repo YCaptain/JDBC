@@ -24,6 +24,11 @@ public class Rents {
 		this.rentPrice = rentPrice;
 	}
 	
+	public Rents(int RNumber, Member member, RentalCar rentalCar, double distance, Date orderDate, Date requiredDate, double rentPrice) {
+		this(RNumber, member.getMNumber(), rentalCar.getRegistrationNumber(), distance, orderDate,
+				 requiredDate, rentPrice);
+	}
+	
 	public int getRNumber() {
 		return RNumber;
 	}

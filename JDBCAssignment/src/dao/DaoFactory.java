@@ -43,14 +43,14 @@ public class DaoFactory {
 			className = prop.getProperty("rentalCarDaoClass");
 			clazz = Class.forName(className);
 			rentalCarDao = (RentalCarDao) clazz.newInstance();
-		/*	
+			
 			className = prop.getProperty("soldCarDaoClass");
 			clazz = Class.forName(className);
 			soldCarDao = (SoldCarDao) clazz.newInstance();
-			
+
 			className = prop.getProperty("rentsDaoClass");
 			clazz = Class.forName(className);
-			rentsDao = (RentsDao) clazz.newInstance(); */
+			rentsDao = (RentsDao) clazz.newInstance();
 			
 			fis.close();
 		} catch(Throwable e) {
