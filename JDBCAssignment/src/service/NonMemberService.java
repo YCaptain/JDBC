@@ -1,8 +1,8 @@
 package service;
 
+import bean.NonMember;
 import dao.DaoFactory;
 import dao.NonMemberDao;
-import entity.NonMember;
 
 public class NonMemberService {
 	private NonMemberDao nonMemberDao;

@@ -1,4 +1,4 @@
-package entity;
+package bean;
 
 public class Model {
 	private int modelNum;

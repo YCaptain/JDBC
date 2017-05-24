@@ -1,6 +1,6 @@
 package dao;
 
-import entity.NonMember;
+import bean.NonMember;
 
 public interface NonMemberDao {
 	public void addNonMember(NonMember nonMember);

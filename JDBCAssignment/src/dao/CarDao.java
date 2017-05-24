@@ -1,6 +1,6 @@
 package dao;
 
-import entity.Car;
+import bean.Car;
 
 public interface CarDao {
 	public void addCar(Car car);

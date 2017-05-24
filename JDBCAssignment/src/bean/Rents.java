@@ -1,4 +1,4 @@
-package entity;
+package bean;
 
 import java.util.Date;
 import java.text.SimpleDateFormat;
@@ -10,23 +10,21 @@ public class Rents {
 	private double distance;
 	private Date orderDate;
 	private Date requiredDate;
-	private double rentPrice;
 	
 	public Rents(){}
 	
-	public Rents(int rentNumber, int memNumber, int registrationNumber, double distance, Date orderDate, Date requiredDate, double rentPrice) {
+	public Rents(int rentNumber, int memNumber, int registrationNumber, double distance, Date orderDate, Date requiredDate) {
 		this.rentNumber = rentNumber;
 		this.memNumber = memNumber;
 		this.registrationNumber = registrationNumber;
 		this.distance = distance;
 		this.orderDate = orderDate;
 		this.requiredDate = requiredDate;
-		this.rentPrice = rentPrice;
 	}
 	
-	public Rents(int rentNumber, Member member, RentalCar rentalCar, double distance, Date orderDate, Date requiredDate, double rentPrice) {
+	public Rents(int rentNumber, Member member, RentalCar rentalCar, double distance, Date orderDate, Date requiredDate) {
 		this(rentNumber, member.getMemNumber(), rentalCar.getRegistrationNumber(), distance, orderDate,
-				 requiredDate, rentPrice);
+				 requiredDate);
 	}
 	
 	public int getRentNumber() {
@@ -77,21 +75,13 @@ public class Rents {
 		this.requiredDate = requiredDate;
 	}
 	
-	public double getRentPrice() {
-		return rentPrice;
-	}
-	
-	public void updateRentPrice(double rentPrice) {
-		this.rentPrice = rentPrice;
-	}
-	
 	@Override
 	public String toString() {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd");
 		String dayO = sdf.format(orderDate);
 		String dayR = sdf.format(requiredDate);
 		String toReturn = "[rentNumber=" + rentNumber + ", memNumber=" + memNumber + ", registrationNumber=" + registrationNumber
-				+ ", distance=" + distance + ", orderDate=" + dayO + ", requiredDate=" + dayR + ", rentPrice=" + rentPrice + "]";
+				+ ", distance=" + distance + ", orderDate=" + dayO + ", requiredDate=" + dayR + "]";
 		return toReturn;
 	}
 }

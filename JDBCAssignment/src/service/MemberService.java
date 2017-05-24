@@ -1,8 +1,8 @@
 package service;
 
+import bean.Member;
 import dao.DaoFactory;
 import dao.MemberDao;
-import entity.Member;
 
 public class MemberService {
 	private MemberDao memberDao;

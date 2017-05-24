@@ -4,10 +4,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
+import bean.Customer;
+import bean.Customer.Sex;
 import dao.CustomerDao;
 import dao.DaoException;
-import entity.Customer;
-import entity.Customer.Sex;
 import utils.JdbcUtils;
 
 public class CustomerDaoImpl implements CustomerDao{

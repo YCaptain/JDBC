@@ -58,6 +58,7 @@ public class InitUtils {
 			
 			sql = "CREATE TABLE rentalCars("
 					+ "registrationNumber INT PRIMARY KEY,"
+					+ "rentPrice DOUBLE,"
 					+ ""
 					+ "FOREIGN KEY (registrationNumber) REFERENCES cars(registrationNumber) ON DELETE CASCADE ON UPDATE CASCADE)";
 			st.execute(sql);
@@ -68,7 +69,7 @@ public class InitUtils {
 					+ "SSN INT,"
 					+ "orderDate datetime NOT NULL,"
 					+ "requiredDate datetime NOT NULL,"
-					+ "soldPrice double NOT NULL,"
+					+ "soldPrice DOUBLE NOT NULL,"
 					+ ""
 					+ "FOREIGN KEY (registrationNumber) REFERENCES cars(registrationNumber) ON DELETE CASCADE ON UPDATE CASCADE,"
 					+ "FOREIGN KEY (SSN) REFERENCES customers(SSN) ON DELETE CASCADE ON UPDATE CASCADE"
@@ -79,10 +80,9 @@ public class InitUtils {
 					+ "rentNumber INT PRIMARY KEY,"
 					+ "memNumber INT,"
 					+ "registrationNumber INT,"
-					+ "distance double DEFAULT 0,"
+					+ "distance DOUBLE DEFAULT 0,"
 					+ "orderDate datetime NOT NULL,"
 					+ "requiredDate datetime NOT NULL,"
-					+ "rentPrice double NOT NULL,"
 					+ ""
 					+ "FOREIGN KEY (registrationNumber) REFERENCES cars(registrationNumber) ON DELETE CASCADE ON UPDATE CASCADE,"
 					+ "FOREIGN KEY (memNumber) REFERENCES members(memNumber) ON DELETE CASCADE ON UPDATE CASCADE"

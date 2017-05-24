@@ -5,9 +5,9 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
+import bean.Car;
 import dao.CarDao;
 import dao.DaoException;
-import entity.Car;
 import utils.JdbcUtils;
 
 public class CarDaoImpl implements CarDao {

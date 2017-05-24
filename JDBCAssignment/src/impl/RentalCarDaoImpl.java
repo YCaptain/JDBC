@@ -4,24 +4,25 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
+import bean.Car;
+import bean.RentalCar;
 import dao.DaoException;
 import dao.RentalCarDao;
-import entity.Car;
-import entity.RentalCar;
 import service.CarService;
 import utils.JdbcUtils;
 
 public class RentalCarDaoImpl implements RentalCarDao {
 
 	@Override
-	public void addRentalCar(RentalCar car) {
+	public void addRentalCar(RentalCar rentalCar) {
 		Connection con = null;
 		PreparedStatement st = null;
 		try{
 			con = JdbcUtils.getConnection();
-			String sql = "INSERT INTO rentalCars(registrationNumber) VALUES (?)";
+			String sql = "INSERT INTO rentalCars(registrationNumber, rentPrice) VALUES (?,?)";
 			st = con.prepareStatement(sql);
-			st.setInt(1, car.getRegistrationNumber());
+			st.setInt(1, rentalCar.getRegistrationNumber());
+			st.setDouble(2, rentalCar.getRentPrice());
 			int count = st.executeUpdate();
 			System.out.println("Add record: " + count);
 		} catch(Exception e) {
@@ -43,9 +44,10 @@ public class RentalCarDaoImpl implements RentalCarDao {
 			st = con.prepareStatement(sql);
 			st.setInt(1, registrationNumber);
 			rs = st.executeQuery();
-			CarService carService = new CarService();
-			Car car = carService.query(rs.getInt("registrationNumber"));
+			CarService rentalCarService = new CarService();
+			Car car = rentalCarService.query(rs.getInt("registrationNumber"));
 			RentalCar rentalCar = new RentalCar(car);
+			rentalCar.updateRentPrice(rs.getDouble("rentPrice"));
 			return rentalCar;
 		} catch(Exception e) {
 			throw new DaoException(e.getMessage(), e);

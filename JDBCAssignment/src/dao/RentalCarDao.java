@@ -1,6 +1,6 @@
 package dao;
 
-import entity.RentalCar;
+import bean.RentalCar;
 
 public interface RentalCarDao {
 	public void addRentalCar(RentalCar car);

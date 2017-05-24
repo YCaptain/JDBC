@@ -1,6 +1,6 @@
 package dao;
 
-import entity.Model;
+import bean.Model;
 
 public interface ModelDao {
 	public void addModel(Model model);

@@ -1,8 +1,8 @@
 package service;
 
+import bean.Customer;
 import dao.CustomerDao;
 import dao.DaoFactory;
-import entity.Customer;
 
 public class CustomerService {
 	private CustomerDao customerDao;

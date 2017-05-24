@@ -5,10 +5,10 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
+import bean.Customer;
+import bean.Member;
 import dao.DaoException;
 import dao.MemberDao;
-import entity.Customer;
-import entity.Member;
 import service.CustomerService;
 import utils.JdbcUtils;
 

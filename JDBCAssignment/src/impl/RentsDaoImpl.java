@@ -5,9 +5,9 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
+import bean.Rents;
 import dao.DaoException;
 import dao.RentsDao;
-import entity.Rents;
 import utils.JdbcUtils;
 
 public class RentsDaoImpl implements RentsDao {
@@ -18,8 +18,8 @@ public class RentsDaoImpl implements RentsDao {
 		PreparedStatement st = null;
 		try{
 			con = JdbcUtils.getConnection();
-			String sql = "INSERT INTO rents(rentNumber, memNumber, registrationNumber, distance, orderDate, requiredDate, rentPrice)"
-					+ " VALUES(?,?,?,?,?,?,?)";
+			String sql = "INSERT INTO rents(rentNumber, memNumber, registrationNumber, distance, orderDate, requiredDate)"
+					+ " VALUES(?,?,?,?,?,?)";
 			st = con.prepareStatement(sql);
 			st.setInt(1, rents.getRentNumber());
 			st.setInt(2, rents.getMemNumber());
@@ -27,7 +27,6 @@ public class RentsDaoImpl implements RentsDao {
 			st.setDouble(4, rents.getDistance());
 			st.setDate(5, new Date(rents.getOrderDate().getTime()));
 			st.setDate(6, new Date(rents.getRequiredDate().getTime()));
-			st.setDouble(7, rents.getRentPrice());
 			int count = st.executeUpdate();
 			System.out.println("Add record: " + count);
 		} catch(Exception e) {
@@ -55,7 +54,6 @@ public class RentsDaoImpl implements RentsDao {
 			rents.updateDistance(rs.getDouble("distance"));
 			rents.updateOrderDate(rs.getDate("orderDate"));
 			rents.updateRequiredDate(rs.getDate("requiredDate"));
-			rents.updateRentPrice(rs.getDouble("rentPrice"));
 			return rents;
 		} catch(Exception e) {
 			throw new DaoException(e.getMessage(), e);
@@ -71,15 +69,14 @@ public class RentsDaoImpl implements RentsDao {
 		try{
 			con = JdbcUtils.getConnection();
 			String sql = "UPDATE rents SET memNumber = ?, registrationNumber = ?, distance = ?,"
-					+ " orderDate = ?, requiredDate = ?, rentPrice = ? WHERE rentNumber = ?";
+					+ " orderDate = ?, requiredDate = ? WHERE rentNumber = ?";
 			st = con.prepareStatement(sql);
 			st.setInt(1, rents.getMemNumber());
 			st.setInt(2, rents.getRegistrationNumber());
 			st.setDouble(3, rents.getDistance());
 			st.setDate(4, new Date(rents.getOrderDate().getTime()));
 			st.setDate(5, new Date(rents.getRequiredDate().getTime()));
-			st.setDouble(6, rents.getRentPrice());
-			st.setInt(7, rents.getRentNumber());
+			st.setInt(6, rents.getRentNumber());
 			int count = st.executeUpdate();
 			System.out.println("Update record: " + count);
 			return count;

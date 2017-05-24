@@ -1,4 +1,4 @@
-package entity;
+package bean;
 
 import java.util.Date;
 import java.text.SimpleDateFormat;

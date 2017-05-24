@@ -4,10 +4,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
+import bean.Customer;
+import bean.NonMember;
 import dao.DaoException;
 import dao.NonMemberDao;
-import entity.Customer;
-import entity.NonMember;
 import service.CustomerService;
 import utils.JdbcUtils;
 

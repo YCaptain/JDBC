@@ -1,6 +1,6 @@
 package dao;
 
-import entity.Rents;
+import bean.Rents;
 
 public interface RentsDao {
 	public void addRent(Rents rents);

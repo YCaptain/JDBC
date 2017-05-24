@@ -1,8 +1,8 @@
 package service;
 
+import bean.Model;
 import dao.DaoFactory;
 import dao.ModelDao;
-import entity.Model;
 
 public class ModelService {
 	private ModelDao modelDao;

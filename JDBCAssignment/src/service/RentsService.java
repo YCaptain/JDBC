@@ -1,8 +1,8 @@
 package service;
 
+import bean.Rents;
 import dao.DaoFactory;
 import dao.RentsDao;
-import entity.Rents;
 
 public class RentsService {
 	private RentsDao rentsDao;

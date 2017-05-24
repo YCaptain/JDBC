@@ -1,6 +1,6 @@
 package dao;
 
-import entity.Customer;
+import bean.Customer;
 
 public interface CustomerDao {
 	public void addCustomer(Customer customer);

@@ -5,10 +5,10 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
+import bean.Car;
+import bean.SoldCar;
 import dao.DaoException;
 import dao.SoldCarDao;
-import entity.Car;
-import entity.SoldCar;
 import service.CarService;
 import utils.JdbcUtils;
 

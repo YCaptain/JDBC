@@ -1,6 +1,6 @@
 package dao;
 
-import entity.Member;
+import bean.Member;
 
 public interface MemberDao {
 	public void addMember(Member Member);

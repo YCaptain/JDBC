@@ -4,9 +4,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
+import bean.Model;
 import dao.DaoException;
 import dao.ModelDao;
-import entity.Model;
 import utils.JdbcUtils;
 
 public class ModelDaoImpl implements ModelDao {
