@@ -20,8 +20,8 @@ public class RentalCarService {
 		}
 	}
 	
-	public RentalCar query(int SSN) {
-		RentalCar rentalCar = rentalCarDao.getRentalCar(SSN);
+	public RentalCar query(int registrationNum) {
+		RentalCar rentalCar = rentalCarDao.getRentalCar(registrationNum);
 		if(rentalCar == null) {
 			System.out.println("The query result is empty!!");
 		} else {

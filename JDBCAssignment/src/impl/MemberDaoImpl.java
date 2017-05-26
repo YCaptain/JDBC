@@ -47,19 +47,22 @@ public class MemberDaoImpl implements MemberDao {
 			st = con.prepareStatement(sql);
 			st.setInt(1, memNumber);
 			rs = st.executeQuery();
-			CustomerService customerService = new CustomerService();
-			Customer customer = customerService.query(rs.getInt("SSN"));
-			Member member = new Member(customer);
-			member.updateMemNumber(memNumber);
-			member.updateDateOfBirth(rs.getDate("dateOfBirth"));
-			member.updateJoinedDate(rs.getDate("joinedDate"));
-			member.updateSSN(rs.getInt("SSN"));
-			return member;
+			while(rs.next()) {
+				CustomerService customerService = new CustomerService();
+				Customer customer = customerService.query(rs.getInt("SSN"));
+				Member member = new Member(customer);
+				member.updateMemNumber(memNumber);
+				member.updateDateOfBirth(rs.getDate("dateOfBirth"));
+				member.updateJoinedDate(rs.getDate("joinedDate"));
+				member.updateSSN(rs.getInt("SSN"));
+				return member;
+			}
 		} catch(Exception e) {
 			throw new DaoException(e.getMessage(), e);
 		} finally {
 			JdbcUtils.free(rs, st, con);
 		}
+		return null;
 	}
 
 	@Override

@@ -47,9 +47,9 @@ public class Car {
 	@Override
 	public String toString() {
 		String toReturn = "[registrationNumber=" + registrationNumber + ", modelNum=" + modelNum;
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd");
-		String day = sdf.format(dateOfManuFacture);
-		toReturn += ", dateOfManuFacture=" + day + "]";
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+	//	String day = sdf.format(dateOfManuFacture);
+		toReturn += ", dateOfManuFacture=" + dateOfManuFacture + "]";
 		return toReturn;
 	}
 }

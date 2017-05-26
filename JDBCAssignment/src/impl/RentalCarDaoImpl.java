@@ -44,16 +44,19 @@ public class RentalCarDaoImpl implements RentalCarDao {
 			st = con.prepareStatement(sql);
 			st.setInt(1, registrationNumber);
 			rs = st.executeQuery();
-			CarService rentalCarService = new CarService();
-			Car car = rentalCarService.query(rs.getInt("registrationNumber"));
-			RentalCar rentalCar = new RentalCar(car);
-			rentalCar.updateRentPrice(rs.getDouble("rentPrice"));
-			return rentalCar;
+			while(rs.next()) {
+				CarService rentalCarService = new CarService();
+				Car car = rentalCarService.query(rs.getInt("registrationNumber"));
+				RentalCar rentalCar = new RentalCar(car);
+				rentalCar.updateRentPrice(rs.getDouble("rentPrice"));
+				return rentalCar;
+			}
 		} catch(Exception e) {
 			throw new DaoException(e.getMessage(), e);
 		} finally {
 			JdbcUtils.free(rs, st, con);
 		}
+		return null;
 	}
 
 	@Override

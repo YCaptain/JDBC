@@ -49,21 +49,24 @@ public class SoldCarDaoImpl implements SoldCarDao {
 			st = con.prepareStatement(sql);
 			st.setInt(1, soldNumber);
 			rs = st.executeQuery();
-			CarService carService = new CarService();
-			Car car = carService.query(rs.getInt("registrationNumber"));
-			SoldCar soldCar = new SoldCar(car);
-			soldCar.updateSoldNumber(rs.getInt("soldNumber"));
-			soldCar.updateSSN(rs.getInt("SSN"));
-			soldCar.updateRegistrationNumber(rs.getInt("registration"));
-			soldCar.updateOrderDate(rs.getDate("orderDate"));
-			soldCar.updateRequiredDate(rs.getDate("requiredDate"));
-			soldCar.updateSoldPrice(rs.getDouble("soldPrice"));
-			return soldCar;
+			while(rs.next()) {
+				CarService carService = new CarService();
+				Car car = carService.query(rs.getInt("registrationNumber"));
+				SoldCar soldCar = new SoldCar(car);
+				soldCar.updateSoldNumber(rs.getInt("soldNumber"));
+				soldCar.updateSSN(rs.getInt("SSN"));
+				soldCar.updateRegistrationNumber(rs.getInt("registrationNumber"));
+				soldCar.updateOrderDate(rs.getDate("orderDate"));
+				soldCar.updateRequiredDate(rs.getDate("requiredDate"));
+				soldCar.updateSoldPrice(rs.getDouble("soldPrice"));
+				return soldCar;
+			}
 		} catch(Exception e) {
 			throw new DaoException(e.getMessage(), e);
 		} finally {
 			JdbcUtils.free(rs, st, con);
 		}
+		return null;
 	}
 
 	@Override

@@ -145,5 +145,8 @@ public class TestDemo {
 		rentsService.regist(rents);
 		rentsService.regist(rents2);
 		rentsService.regist(rents3);
+		
+		RentalCar ren = rentalCarService.query(10100001);
+		System.out.println(ren.getRegistrationNumber());
 	}
 }

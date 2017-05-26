@@ -34,7 +34,7 @@ public class ModelDaoImpl implements ModelDao {
 	}
 
 	@Override
-	public Model getModel(String modelName) {
+	public Model getModel(int modelNum) {
 		Connection con = null;
 		PreparedStatement st = null;
 		ResultSet rs = null;
@@ -42,13 +42,15 @@ public class ModelDaoImpl implements ModelDao {
 			con = JdbcUtils.getConnection();
 			String sql = "SELECT * FROM models WHERE modelNum = ?";
 			st = con.prepareStatement(sql);
-			st.setString(1, modelName);
+			st.setInt(1, modelNum);
 			rs = st.executeQuery();
 			Model model = new Model();
-			model.updateModelNum(rs.getInt("modelNum"));
-			model.updateModelName(rs.getString("modelName"));
-			model.updateManufacturer(rs.getString("manufacturer"));
-			model.updateSeats(rs.getInt("seats"));
+			while(rs.next()) {
+				model.updateModelNum(rs.getInt("modelNum"));
+				model.updateModelName(rs.getString("modelName"));
+				model.updateManufacturer(rs.getString("manufacturer"));
+				model.updateSeats(rs.getInt("seats"));
+			}
 			return model;
 		} catch(Exception e) {
 			throw new DaoException(e.getMessage(), e);

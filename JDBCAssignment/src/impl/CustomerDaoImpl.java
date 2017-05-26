@@ -49,21 +49,23 @@ public class CustomerDaoImpl implements CustomerDao{
 			st.setInt(1, SSN);
 			rs = st.executeQuery();
 			Customer customer = new Customer();
-			customer.updateSSN(SSN);
-			customer.updateName(rs.getString("name"));
-			if(rs.getString("sex").equals("MALE")) {
-				customer.updateSex(Sex.MALE);
-			} else if(rs.getString("sex").equals("FEMALE")) {
-				customer.updateSex(Sex.FEMALE);
-			} else if(rs.getString("sex").equals("OTHER")) {
-				customer.updateSex(Sex.OTHER);
-			} else {
+			while(rs.next()) {
+				customer.updateSSN(SSN);
+				customer.updateName(rs.getString("name"));
+				if(rs.getString("sex").equals("MALE")) {
+					customer.updateSex(Sex.MALE);
+				} else if(rs.getString("sex").equals("FEMALE")) {
+					customer.updateSex(Sex.FEMALE);
+				} else if(rs.getString("sex").equals("OTHER")) {
+					customer.updateSex(Sex.OTHER);
+				} else {
 				throw new Exception();
+				}
+				customer.updateAddress(rs.getString("address"));
+				customer.updateCity(rs.getString("city"));
+				customer.updateCountry(rs.getString("country"));
+				customer.updatePhone(rs.getInt("phone"));
 			}
-			customer.updateAddress(rs.getString("address"));
-			customer.updateCity(rs.getString("city"));
-			customer.updateCountry(rs.getString("country"));
-			customer.updatePhone(rs.getInt("phone"));
 			return customer;
 		} catch(Exception e) {
 			throw new DaoException(e.getMessage(), e);

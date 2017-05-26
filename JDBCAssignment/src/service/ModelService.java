@@ -20,8 +20,8 @@ public class ModelService {
 		}
 	}
 	
-	public Model query(String modelName) {
-		Model model = modelDao.getModel(modelName);
+	public Model query(int modelNum) {
+		Model model = modelDao.getModel(modelNum);
 		if(model.getModelNum() <= 0) {
 			System.out.println("The query result is empty!!");
 		} else {

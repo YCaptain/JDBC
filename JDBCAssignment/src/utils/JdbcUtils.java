@@ -8,6 +8,7 @@ import java.sql.Statement;
 
 public class JdbcUtils {
 	private static final String DBDRIVER = "com.mysql.jdbc.Driver";
+	private static final String DBBASICURL = "jdbc:mysql://localhost:3306?characterEncoding=gbk&useSSL=true";
 	private static final String DBURL = "jdbc:mysql://localhost:3306/assignment?characterEncoding=gbk&useSSL=true";
 	private static final String DBUSER = "root";
 	private static final String DBPASS = "";
@@ -22,6 +23,10 @@ public class JdbcUtils {
 	}
 	
 	private JdbcUtils(){}
+	
+	public static Connection getBasicConnection() throws SQLException {
+		return DriverManager.getConnection(DBBASICURL, DBUSER, DBPASS);
+	}
 	
 	public static Connection getConnection() throws SQLException {
 		return DriverManager.getConnection(DBURL, DBUSER, DBPASS);

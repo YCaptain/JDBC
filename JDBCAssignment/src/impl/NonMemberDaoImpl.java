@@ -42,15 +42,19 @@ public class NonMemberDaoImpl implements NonMemberDao {
 			st = con.prepareStatement(sql);
 			st.setInt(1, SSN);
 			rs = st.executeQuery();
-			CustomerService customerService = new CustomerService();
-			Customer customer = customerService.query(rs.getInt("SSN"));
-			NonMember nonMember = new NonMember(customer);
-			return nonMember;
+			while(rs.next()) {
+				CustomerService customerService = new CustomerService();
+				Customer customer = customerService.query(rs.getInt("SSN"));
+				NonMember nonMember = new NonMember(customer);
+				return nonMember;
+			}
+			
 		} catch(Exception e) {
 			throw new DaoException(e.getMessage(), e);
 		} finally {
 			JdbcUtils.free(rs, st, con);
 		}
+		return null;
 	}
 
 	@Override

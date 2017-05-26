@@ -45,9 +45,11 @@ public class CarDaoImpl implements CarDao {
 			st.setInt(1, registrationNumber);
 			rs = st.executeQuery();
 			Car car = new Car();
-			car.updateRegistrationNumber(registrationNumber);
-			car.updateModelNum(rs.getInt("modelNum"));
-			car.updateDateOfManuFacture(rs.getDate("dateOfManuFacture"));
+			while(rs.next()) {
+				car.updateRegistrationNumber(registrationNumber);
+				car.updateModelNum(rs.getInt("modelNum"));
+				car.updateDateOfManuFacture(rs.getDate("dateOfManuFacture"));
+			}
 			return car;
 		} catch(Exception e) {
 			throw new DaoException(e.getMessage(), e);

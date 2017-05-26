@@ -48,12 +48,14 @@ public class RentsDaoImpl implements RentsDao {
 			st.setInt(1, rentNumber);
 			rs = st.executeQuery();
 			Rents rents = new Rents();
-			rents.updateRentNumber(rentNumber);
-			rents.updateMemNumber(rs.getInt("memNumber"));
-			rents.updateRegistrationNumber(rs.getInt("registrationNumber"));
-			rents.updateDistance(rs.getDouble("distance"));
-			rents.updateOrderDate(rs.getDate("orderDate"));
-			rents.updateRequiredDate(rs.getDate("requiredDate"));
+			while(rs.next()) {
+				rents.updateRentNumber(rentNumber);
+				rents.updateMemNumber(rs.getInt("memNumber"));
+				rents.updateRegistrationNumber(rs.getInt("registrationNumber"));
+				rents.updateDistance(rs.getDouble("distance"));
+				rents.updateOrderDate(rs.getDate("orderDate"));
+				rents.updateRequiredDate(rs.getDate("requiredDate"));
+			}
 			return rents;
 		} catch(Exception e) {
 			throw new DaoException(e.getMessage(), e);

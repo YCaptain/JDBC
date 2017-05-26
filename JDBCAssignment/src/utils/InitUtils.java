@@ -3,7 +3,45 @@ package utils;
 import java.sql.Connection;
 import java.sql.Statement;
 
+import javax.swing.JOptionPane;
+
 public class InitUtils {
+	public static void createDataBase() {
+		Connection con = null;
+		Statement st = null;
+		try{
+			con = JdbcUtils.getBasicConnection();
+			st = con.createStatement();
+
+			String sql = "CREATE DATABASE assignment";
+			st.execute(sql);
+			JOptionPane.showMessageDialog(null, "new success", "message", JOptionPane.INFORMATION_MESSAGE);
+		} catch(Exception e) {
+			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, "can not do repititive new database", "error", JOptionPane.ERROR_MESSAGE);
+		} finally {
+			JdbcUtils.free(null, st, con);
+		}
+	}
+	
+	public static void dropDatabase() {
+		Connection con = null;
+		Statement st = null;
+		try{
+			con = JdbcUtils.getBasicConnection();
+			st = con.createStatement();
+			
+			String sql = "DROP DATABASE assignment";
+			st.execute(sql);
+			JOptionPane.showMessageDialog(null, "drop success", "message", JOptionPane.INFORMATION_MESSAGE);
+		} catch(Exception e) {
+			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, "you need create a database firstly", "error", JOptionPane.ERROR_MESSAGE);
+		} finally {
+			JdbcUtils.free(null, st, con);
+		}
+	}
+	
 	public static void initTables(){
 		Connection con = null;
 		Statement st = null;
@@ -88,8 +126,11 @@ public class InitUtils {
 					+ "FOREIGN KEY (memNumber) REFERENCES members(memNumber) ON DELETE CASCADE ON UPDATE CASCADE"
 					+ ")AUTO_INCREMENT=10400000";
 			st.execute(sql);
+			TestDemo.main(null);
+			JOptionPane.showMessageDialog(null, "initialize success", "message", JOptionPane.INFORMATION_MESSAGE);
 		} catch(Exception e) {
 			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, "can not do repititive initial options or you need new database", "error", JOptionPane.ERROR_MESSAGE);
 		} finally {
 			JdbcUtils.free(null, st, con);
 		}
