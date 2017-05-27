@@ -112,7 +112,6 @@ public class RentalCarFrame {
 			contentPane.add(lblModelName);
 			
 			modelName = new JTextField();
-			modelName.setEditable(false);
 			modelName.setBounds(122, 91, 86, 24);
 			contentPane.add(modelName);
 			modelName.setColumns(10);
@@ -124,7 +123,6 @@ public class RentalCarFrame {
 			contentPane.add(lblModelNum);
 			
 			modelNum = new JTextField();
-			modelNum.setEditable(false);
 			modelNum.setBounds(314, 91, 86, 24);
 			contentPane.add(modelNum);
 			modelNum.setColumns(10);
@@ -136,7 +134,6 @@ public class RentalCarFrame {
 			contentPane.add(lblManufacturer);
 			
 			manufacturer = new JTextField();
-			manufacturer.setEditable(false);
 			manufacturer.setBounds(122, 125, 86, 24);
 			contentPane.add(manufacturer);
 			manufacturer.setColumns(10);
@@ -154,20 +151,18 @@ public class RentalCarFrame {
 			contentPane.add(lblSeats);
 			
 			seats = new JTextField();
-			seats.setEditable(false);
 			seats.setBounds(314, 125, 86, 24);
 			contentPane.add(seats);
 			seats.setColumns(10);
 			
 			dataOfManufacture = new JTextField();
-			dataOfManufacture.setEditable(false);
 			dataOfManufacture.setBounds(180, 159, 152, 24);
 			contentPane.add(dataOfManufacture);
 			dataOfManufacture.setColumns(10);
 			
-			JButton btnSearch = new JButton("Search");
-			btnSearch.setFont(new Font("Arial Black", Font.BOLD, 15));
-			btnSearch.addMouseListener(new MouseAdapter() {
+			JButton btnInsert = new JButton("Insert");
+			btnInsert.setFont(new Font("Arial Black", Font.BOLD, 15));
+			btnInsert.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent event) {
 					String txt = txtSd.getText();
@@ -184,8 +179,8 @@ public class RentalCarFrame {
 					
 				}
 			});
-			btnSearch.setBounds(162, 213, 113, 27);
-			contentPane.add(btnSearch);
+			btnInsert.setBounds(162, 213, 113, 27);
+			contentPane.add(btnInsert);
 			
 			JButton btnBack = new JButton("back");
 			btnBack.setFont(new Font("Arial Black", Font.BOLD, 15));

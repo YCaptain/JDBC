@@ -17,11 +17,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import bean.Model;
-import main.Query;
 import main.Update;
 import bean.Car;
-import service.ModelService;
 import service.CarService;
 
 public class CarUpdate {

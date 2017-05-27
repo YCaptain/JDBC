@@ -157,9 +157,9 @@ public class CustomerFrame {
 			contentPane.add(phone);
 			phone.setColumns(10);
 			
-			JButton btnSearch = new JButton("Search");
-			btnSearch.setFont(new Font("Arial Black", Font.PLAIN, 15));
-			btnSearch.addMouseListener(new MouseAdapter() {
+			JButton btnInsert = new JButton("Insert");
+			btnInsert.setFont(new Font("Arial Black", Font.PLAIN, 15));
+			btnInsert.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent event) {
 					String txt = txtSd.getText();
@@ -173,8 +173,8 @@ public class CustomerFrame {
 					phone.setText("" + customer.getPhone());
 				}
 			});
-			btnSearch.setBounds(162, 213, 113, 27);
-			contentPane.add(btnSearch);
+			btnInsert.setBounds(162, 213, 113, 27);
+			contentPane.add(btnInsert);
 			
 			JButton btnBack = new JButton("back");
 			btnBack.setFont(new Font("Arial Black", Font.PLAIN, 15));

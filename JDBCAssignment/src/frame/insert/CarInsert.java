@@ -18,9 +18,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import bean.Car;
-import main.Update;
+import main.Insert;
 import service.CarService;
-
 public class CarInsert {
 
 	private JFrame frame;
@@ -127,7 +126,7 @@ public class CarInsert {
 					String txt = regisNum.getText();
 					int registration = Integer.parseInt(txt);
 					Car car = new Car();
-					car.updateRegistrationNumber(Integer.parseInt(regisNum.getText()));
+					car.updateRegistrationNumber(registration);
 					car.updateModelNum(Integer.parseInt(modelNum.getText()));
 					SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 					try {
@@ -149,8 +148,8 @@ public class CarInsert {
 			btnBack.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
-					Update update = new Update();
-					update.run();
+					Insert insert = new Insert();
+					insert.run();
 					frame.dispose();
 				}
 			});

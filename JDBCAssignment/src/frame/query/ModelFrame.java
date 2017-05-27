@@ -118,10 +118,10 @@ public class ModelFrame {
 			contentPane.add(manufacturer);
 			manufacturer.setColumns(10);
 			
-			JButton btnSearch = new JButton("Search");
-			btnSearch.setFont(new Font("Arial Black", Font.BOLD, 15));
-			btnSearch.setBackground(new Color(153, 204, 102));
-			btnSearch.addMouseListener(new MouseAdapter() {
+			JButton btnInsert = new JButton("Insert");
+			btnInsert.setFont(new Font("Arial Black", Font.BOLD, 15));
+			btnInsert.setBackground(new Color(153, 204, 102));
+			btnInsert.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent event) {
 					String txt = txtSd.getText();
@@ -132,8 +132,8 @@ public class ModelFrame {
 					seats.setText("" + model.getSeats());
 				}
 			});
-			btnSearch.setBounds(173, 208, 113, 27);
-			contentPane.add(btnSearch);
+			btnInsert.setBounds(173, 208, 113, 27);
+			contentPane.add(btnInsert);
 			
 			JButton btnBack = new JButton("back");
 			btnBack.setFont(new Font("Arial Black", Font.BOLD, 15));

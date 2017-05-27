@@ -86,6 +86,14 @@ public class Enter {
 		contentPane.add(btnQuery);
 		
 		JButton btnInsert = new JButton("Insert");
+		btnInsert.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				Insert insert = new Insert();
+				insert.run();
+				frame.dispose();
+			}
+		});
 
 		btnInsert.setFont(new Font("Arial Black", Font.PLAIN, 15));
 		btnInsert.setBounds(237, 81, 113, 27);
@@ -125,6 +133,12 @@ public class Enter {
 		JButton btnExit = new JButton("exit");
 		btnExit.setFont(new Font("Arial Black", Font.PLAIN, 15));
 		btnExit.setBounds(305, 213, 113, 27);
+		btnExit.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				frame.dispose();
+			}
+		});
 		contentPane.add(btnExit);
 		
 		JButton btnAvailabelCar = new JButton("Availabel Car");
